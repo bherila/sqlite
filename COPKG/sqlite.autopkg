@@ -1,0 +1,44 @@
+@import @"version.inc";
+
+nuget {
+    nuspec {
+        id: sqlite3;
+        version: 1.0.0.0;
+        title: sqlite3;
+        authors: {sqlite, Garrett Serack, Benjamin Herila};
+        owners: {Benjamin Herila, CoApp Project};
+        licenseUrl: "http://www.sqlite.org";
+        projectUrl: "http://www.sqlite.org";
+        iconUrl: "";
+        requireLicenseAcceptance:false;
+		
+        summary:"SQLite is a in-process library that implements a self-contained, serverless, zero-configuration, transactional SQL database engine. The code for SQLite is in the public domain and is thus free for use for any purpose, commercial or private. SQLite is currently found in more applications than we can count, including several high-profile projects.";
+
+        description: @"SQLite is a in-process library that implements a self-contained, serverless, zero-configuration, transactional SQL database engine. The code for SQLite is in the public domain and is thus free for use for any purpose, commercial or private. SQLite is currently found in more applications than we can count, including several high-profile projects.";
+		
+        releaseNotes: "";
+        copyright: Copyright 2013; 
+        tags: { sqlite, database, native, CoApp };
+    };
+	
+	files { 
+		include: { ..\*.h };
+		source:  { ..\*.c };
+		
+		("Win32,x64", "release,debug", "v100,v110", "dynamic") => {
+			[${0},${1},${2},${3}] {
+				lib:     { ..\vstudio.${2}\${0}\release\*.lib };
+				bin:     { ..\vstudio.${2}\${0}\release\*.exe };
+				symbols: { ..\vstudio.${2}\${0}\release\*.pdb };
+			}
+		}
+		
+	};
+
+	docs: { ..\doc\**\* };
+
+	targets {
+		Defines += HAS_SQLITE3;
+	};
+		
+}
