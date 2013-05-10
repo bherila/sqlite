@@ -1,4 +1,10 @@
 *.suo
 *.sdf
-vstudio.v110\x64
-vstudio.v110\Win32
+*.tlog
+*.pdb
+*.dll
+*.lib
+*.ilk
+*.obj
+x64
+Win32
